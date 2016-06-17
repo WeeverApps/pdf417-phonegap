@@ -8,7 +8,7 @@ pushd $HERE >> /dev/null
 rm -rf Pdf417Demo
 
 # create a sample application
-cordova create Pdf417Demo mobi.pdf417.demo Pdf417Demo
+cordova create Pdf417Demo mobi.pdf417.demo Pdf417Demo --copy-from=www
 
 # enter into demo project folder
 cd Pdf417Demo
@@ -20,14 +20,6 @@ cordova plugin add ../Pdf417
 cordova platform add android
 cordova platform add ios
 cordova platform add wp8
-
-# copy index.html, index.js and usdl_keys.js
-cp  -f ../index.html www/index.html
-cp  -f ../index.js www/js/index.js
-cp  -f ../usdl_keys.js www/js/usdl_keys.js
-
-# add logo
-cp  -f ../logo.png www/img/logo.png
 
 # build app
 cordova build
