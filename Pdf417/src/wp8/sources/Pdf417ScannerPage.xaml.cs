@@ -162,8 +162,8 @@ namespace Microblink
                     Application.Current.Terminate();
                 }
             } else {
-                // there are no other error types
-                throw new NotImplementedException();
+                MessageBox.Show("There was an error while initialising the recognizer: " + errorType);
+                Application.Current.Terminate();
             }
         }
 
@@ -247,17 +247,23 @@ namespace Microblink
         /// </summary>
         /// <param name="error"></param>
         void mRecognizer_OnCameraError(Microblink.UserControls.CameraError error) {
-            if (OnFailure != null) {
-                switch (error) {
+            if (OnFailure != null)
+            {
+                switch (error)
+                {
                     case CameraError.CameraNotReady: OnFailure("Camera not ready"); break;
                     case CameraError.NoCameraAtSelectedSensorLocation: OnFailure("No camera at selected sensor location"); break;
                     case CameraError.NotSupported: OnFailure("Camera not supported"); break;
                     case CameraError.PreviewSizeTooSmall: OnFailure("Camera preview size too small"); break;
                     default: OnFailure("Camera error"); break;
                 }
-            } 
+            }
             // just throw an exception
-            else throw new NullReferenceException();
+            else
+            {
+                MessageBox.Show("There was an error while initialising the camera: " + error.ToString() );
+                Application.Current.Terminate();
+            }
         }
 
         public Pdf417ScannerPage() {
